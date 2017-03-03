@@ -1,0 +1,48 @@
+$custom-primary-color: #004f59 !default;
+$custom-secondary-color: #00abab !default;
+$custom-tertiary-color: #ffba00 !default;
+
+$custom-red: #ff3c00 !default;
+$custom-orange: #ff7e00 !default;
+$custom-green: #51c802 !default;
+
+// Layout
+$border-colors: #efefef !default;
+$body-color: #fbfbfb !default;
+$input-bg-color: #fafafa !default;
+
+// Crossbrowser prefixes array
+$array: "-webkit-", "-moz-", "-o-", "-ms-", "";
+
+// keyframes mixin
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+
+    @-o-keyframes #{$name} {
+        @content;
+    }
+
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+@mixin calc($key, $value) {
+  #{$key}: -webkit-calc(#{$value});
+  #{$key}: -moz-calc(#{$value});
+  #{$key}: calc(#{$value});
+}
+
+.highlight {
+    color:$custom-tertiary-color;
+}

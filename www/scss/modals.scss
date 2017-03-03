@@ -1,0 +1,275 @@
+/**
+ * angular-fancy-modal - the definitive modal/popup/dialog solution for AngularJS.
+ * @author Alessandro Arnodo
+ * @url http://alessandro.arnodo.net
+ * @version v0.1.4
+ * @link https://github.com/vesparny/angular-fancy-modal
+ * @license MIT
+ */
+body.fancymodal-open {
+    overflow: hidden;
+}
+
+.fancymodal,
+.fancymodal *,
+.fancymodal *:before,
+.fancymodal *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.fancymodal {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    overflow: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    .comments {
+        ul.comment-list {
+            margin-left: 0px;
+            margin-bottom: 0px;
+            border: 1px solid $border-colors;
+
+            li {
+                text-align: left;
+                width: 100%;
+                border-bottom: 1px solid $border-colors;
+                padding: 10px;
+                list-style: none;
+                height: 100%;
+                position: relative;
+
+                @each $item in $array {
+                    #{$item}transition: all 0.5s linear;
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:hover {
+                    text-decoration: none;
+                    background: $border-colors;
+
+                    i.icon-cancel {
+                        opacity: 1;
+                    }
+                }
+
+                span {
+                    font-style: italic;
+                }
+
+                i.icon-cancel {
+                    opacity: 0;
+                    color: $secondary-color;
+                    font-size: 1rem;
+                    vertical-align: middle;
+                    position: absolute;
+                    right: 20px;
+
+                    @each $item in $array {
+                        #{$item}transition: all 0.5s linear;
+                    }
+                }
+
+                p {
+                    margin-bottom: 0px;
+                }
+
+                h3 {
+                    line-height: 0.5;
+                    text-align: left;
+                    font-weight: bolder;
+                    font-size: 0.9rem;
+                    text-transform: uppercase;
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}
+
+.fancymodal .fancymodal-overlay {
+    -webkit-backface-visibility: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.fancymodal .fancymodal-content {
+    max-width: 500px;
+    background: #fff;
+    -webkit-backface-visibility: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    padding:1em;
+    border-radius: 3px;
+    color: #000;
+    z-index: 10000;
+    height: auto;
+    overflow: visible;
+    position: relative;
+    margin: 0 auto;
+}
+
+.fancymodal .fancymodal-close {
+    border-radius: 3px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.fancymodal .fancymodal-close:before {
+    border-radius: 3px;
+    position: absolute;
+    content: "\00D7";
+    font-size: 26px;
+    line-height: 31px;
+    height: 30px;
+    width: 30px;
+    padding-left: 1px;
+    text-align: center;
+    top: 3px;
+    right: 3px;
+    background: white;
+    color: #ccc;
+    z-index: 4;
+}
+
+.fancymodal .fancymodal-close:hover:before,
+.fancymodal .fancymodal-close:active:before {
+    color: #777;
+    background: #e0e0e0;
+}
+
+.fancymodal .fancymodal-content-opening {
+    -webkit-animation: fancymodal-in 0.5s;
+    animation: fancymodal-in 0.5s;
+}
+
+.fancymodal .fancymodal-content-closing {
+    -webkit-animation: fancymodal-out 0.5s;
+    animation: fancymodal-out 0.5s;
+}
+
+.fancymodal .fancymodal-overlay-opening {
+    -webkit-animation: fancymodal-fadeIn 0.5s;
+    animation: fancymodal-fadeIn 0.5s;
+}
+
+.fancymodal .fancymodal-overlay-closing {
+    -webkit-animation: fancymodal-fadeOut 0.5s;
+    animation: fancymodal-fadeOut 0.5s;
+}
+
+@-webkit-keyframes fancymodal-in {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-40px);
+        transform: translateY(-40px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translate(0);
+        transform: translate(0,0);
+    }
+}
+
+@keyframes fancymodal-in {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-40px);
+        transform: translateY(-40px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes fancymodal-out {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-40px);
+        transform: translateY(-40px);
+    }
+}
+
+@keyframes fancymodal-out {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-40px);
+        transform: translateY(-40px);
+    }
+}
+
+@-webkit-keyframes fancymodal-fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fancymodal-fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fancymodal-fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fancymodal-fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

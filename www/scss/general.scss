@@ -1,0 +1,43 @@
+html {
+  	height: 100%;
+}
+body {
+	height:100%;
+	margin:0;
+	background-color:#e8e8e8 !important;
+}
+ui-view, .container, main {
+    height: inherit;
+}
+main ui-view {
+	height:100%;
+}
+
+.center-all {
+	top: 50%; /* position the left edge of the element at the middle of the parent */
+	left:50%;
+    transform: translate(-50%,-50%); /* This is a shorthand of */
+    position: absolute;
+}
+body .container {
+	position:relative;
+}
+
+.login-page {
+	.logo {
+		text-align:center;
+		img {
+			margin-top:50px;
+			width:50%;
+			max-width:200px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+	}
+	.services {
+		text-align:center;
+	}
+}
+.pane {
+	background-color:#e8e8e8 !important;
+}
