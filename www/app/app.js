@@ -76,41 +76,41 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.overview', {
+    url: '/overview',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-overview': {
+        templateUrl: 'templates/tab-overview.html',
+        controller: 'overviewController'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.ask', {
+      url: '/ask',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-ask': {
+          templateUrl: 'templates/tab-ask.html',
+          controller: 'askController'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+    .state('tab.answer', {
+      url: '/answer',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'tab-answer': {
+          templateUrl: 'templates/tab-answer.html',
+          controller: 'answerController'
         }
       }
     })
 
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.settings', {
+    url: '/settings',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-settings': {
+        templateUrl: 'templates/tab-settings.html',
+        controller: 'settingsController'
       }
     }
   });
