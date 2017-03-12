@@ -4,7 +4,7 @@ html {
 body {
 	height:100%;
 	margin:0;
-	background-color:#e8e8e8 !important;
+	background-color:#ffffff !important;
 }
 ui-view, .container, main {
     height: inherit;
@@ -39,5 +39,14 @@ body .container {
 	}
 }
 .pane {
-	background-color:#e8e8e8 !important;
+	background-color:#f4f4f4 !important;
+
+}
+.level-background {
+	background:#ffc900;
+	-webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  border: none;
+  max-width:200px !important;
 }

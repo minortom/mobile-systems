@@ -19,7 +19,8 @@ var app = angular.module('starter',
     'ngCordova',
     'ngCordovaOauth',
     'ion-autocomplete',
-    'ngLodash'
+    'ngLodash',
+    'highcharts-ng'
 ]);
 
 

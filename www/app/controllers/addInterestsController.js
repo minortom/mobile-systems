@@ -1,4 +1,4 @@
-app.controller('addInterestsController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', 'lodash', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, lodash) {
+app.controller('addInterestsController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', 'lodash', '$location', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, lodash, $location) {
 	$scope.interests = [
 		{id: 1, category : "Arts & Entertainment"},
 		{id: 2, category : "Music"},
@@ -44,12 +44,9 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
         }
         return {items: []};
 	}
-	$scope.setInterest = function(query) {
-		console.log($scope)
-		console.log(query);
-	}
-	$scope.removeInterest = function(query) {
-		console.log(query)
+	$scope.finishSelection = function(query) {
+		store.set('selectedInterests', $scope.addedItems);
+		$location.path('/tab/overview');
 	}
 	$scope.cancelButtonClickedMethod = function (callback) {
 		console.log(callback);
@@ -66,5 +63,5 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
 	   }
 	}
 
-	//store.set('interests', interests);
+	
 }]);

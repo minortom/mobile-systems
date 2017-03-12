@@ -1,5 +1,20 @@
-<ion-view view-title="Overview">
-  <ion-content>
-  <button ng-click="hoi();"></button>
-  </ion-content>
-</ion-view>
+<ion-view hide-nav-bar="true">
+<ion-header-bar align-title="middle">
+  <h1 class="title">Overview</h1>
+  <div class="buttons">
+    <button class="button button-dark"><i class="ion-ribbon-b energized"></i>&nbsp;2</button>
+  </div>
+</ion-header-bar>
+<ion-content class="has-header">
+   <highchart id="chart1" config="chart.answeredQuestions" style="width:100%;"></highchart>
+   <div class="row level-background">
+	    <div class="col">
+	        <div class="text-center">
+	            <h1 class="center"><a class="button button-icon icon ion-ribbon-b "></a><br>Beginner<br></h1>
+	            <h4>Level 2</h4>
+	        </div>
+	    </div>
+	</div>
+   
+</ion-content>
+
