@@ -1,0 +1,39 @@
+<ion-view view-title="Add or edit your interests">
+  <ion-content>
+  	<form>
+
+            <label class="item item-input">
+              <i class="icon ion-search placeholder-icon"></i>
+                <input ion-autocomplete type="text" readonly="readonly" class="ion-autocomplete" autocomplete="on"
+                       ng-model="model"
+                       item-value-key="name"
+                       item-view-value-key="view"
+                       items-method="findInterest(query)"
+                       items-method-value-key="items"
+                       placeholder="Find interests.."
+                       items-clicked-method="setInterest(callback)"
+                       items-removed-method="removeInterest(callback)"
+                       clear-on-select="true"
+                       external-model="selects"
+                       cancel-button-clicked-method="cancelButtonClickedMethod(callback)"
+                       max-selected-items="10"/>
+            </label>
+
+          
+
+        </form>
+        <ion-list can-swipe="true" show-delete="true">
+          <ion-item ng-repeat="item in addedItems">
+           {{item.name}}
+            <ion-delete-button class="ion-minus-circled"
+                       ng-click="addedItems.splice($index, 1)">
+            </ion-delete-button>
+          </ion-item>
+        </ion-list>
+
+  </ion-content>
+  <div class="bar bar-footer bar-light">
+    <button ng-disabled="addedItems.length < 5" class="button button-balanced pull-right" ng-click="finishSelection()">Next ({{addedItems.length}}/5)</button>
+ 
+  </div>
+</ion-view>

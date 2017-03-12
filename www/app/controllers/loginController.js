@@ -3,10 +3,10 @@ app.controller('loginController', ['$scope','processApiCallService', 'apiService
 		 console.log("clicked");
 		 $cordovaOauth.facebook("180932542403431", ["email"]).then(function(result) {
 		 alert("Auth Success..!!"+result);
-		 $location.url('/tab/overview');
+		 $location.url('/add-interests');
 		 }, function(error) {
 		 	alert("Auth Error..!!"+error);
-		 $location.url('/tab/overview');
+		 $location.url('/add-interests');
 		 });
 	};
 

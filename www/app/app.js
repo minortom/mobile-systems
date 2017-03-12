@@ -18,6 +18,8 @@ var app = angular.module('starter',
     'ngCookies',
     'ngCordova',
     'ngCordovaOauth',
+    'ion-autocomplete',
+    'ngLodash'
 ]);
 
 
@@ -73,7 +75,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/login.html',
     controller: 'loginController'
   })
-
+  // setup an abstract state for the tabs directive
+  .state('addinterests', {
+    url: '/add-interests',
+    templateUrl: 'templates/addinterests.html',
+    controller: 'addInterestsController'
+  })
   // Each tab has its own nav history stack:
 
   .state('tab.overview', {
