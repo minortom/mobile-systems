@@ -1,5 +1,6 @@
 app.controller('overviewController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth) {
 	var selectedInterests = store.get('selectedInterests');
+	$scope.usersettings = store.get('userSettings');
 	$scope.chart = {
 		answeredQuestions : {
 		    chart: {
@@ -9,7 +10,7 @@ app.controller('overviewController', ['$scope','processApiCallService', 'apiServ
 		        backgroundColor:'rgba(255, 255, 255, 0.1)'
 		    },
 		    title: {
-		        text: '<b>20</b><br>Questions <br>answered',
+		        text: '<b>'+$scope.usersettings.asked+'</b><br>Questions <br>answered',
 		        align: 'center',
 		        verticalAlign: 'middle',
 		        y: -20
@@ -42,8 +43,8 @@ app.controller('overviewController', ['$scope','processApiCallService', 'apiServ
 		        name: 'Answered questions',
 		        innerSize: '60%',
 		        data: [
-		            ['Correct',   60],
-		            ['Incorrect',       40]
+		            ['Correct',  (($scope.usersettings.correctlyAnswered/$scope.usersettings.asked) * 100)],
+		            ['Incorrect',  (100-(($scope.usersettings.correctlyAnswered/$scope.usersettings.asked) * 100))]
 		        ]
 		    }]
 		}

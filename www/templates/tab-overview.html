@@ -1,8 +1,8 @@
-<ion-view hide-nav-bar="true">
+<ion-view hide-nav-bar="true" view-title="Overview">
 <ion-header-bar align-title="middle">
   <h1 class="title">Overview</h1>
   <div class="buttons">
-    <button class="button button-dark"><i class="ion-ribbon-b energized"></i>&nbsp;2</button>
+    <button class="button button-dark"><i class="ion-ribbon-b energized"></i>&nbsp;{{usersettings.level}}</button>
   </div>
 </ion-header-bar>
 <ion-content class="has-header">
@@ -11,7 +11,7 @@
 	    <div class="col">
 	        <div class="text-center">
 	            <h1 class="center"><a class="button button-icon icon ion-ribbon-b "></a><br>Beginner<br></h1>
-	            <h4>Level 2</h4>
+	            <h4>Level {{usersettings.level}}</h4>
 	        </div>
 	    </div>
 	</div>

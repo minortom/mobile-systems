@@ -1,0 +1,26 @@
+<ion-view hide-nav-bar="true" view-title="Ask">
+<ion-header-bar align-title="middle">
+  <h1 class="title">Ask</h1>
+  <div class="buttons">
+    <button class="button button-dark"><i class="ion-ribbon-b energized"></i>&nbsp;{{usersettings.level}}</button>
+  </div>
+</ion-header-bar>
+<ion-content class="has-header">
+   <div class="list">
+	  <label class="item item-input">
+	    <textarea placeholder="Type your question here" id="q" name="q" ng-model="text" ng-change="parseText(text)"style="min-height:200px;"></textarea>
+
+	  </label>
+	   <button class="button button-light ion-android-microphone">
+     		Record your question
+        </button>
+        <button class="button button-block button-balanced ion-ios-chatbubble" ng-disabled="text.length < 10" ng-click="askQuestion()">
+        	Ask this question
+        </button>
+	</div>
+	<ul class="list">
+		<h1 style="text-align:center;" ng-if="tags.length > 0">Tags</h1>
+	   <span ng-repeat="item in tags" class="label" ng-class="{primary: item.kind == 'people', secondary: item.kind == 'places', success: item.kind == 'verbs', alert: item.kind == 'nouns', warning: item.kind == 'adjective'}"><i ng-if="item.kind == 'places'" class="ion-location"></i><i ng-if="item.kind == 'people'" class="ion-ios-people"></i><i ng-if="item.kind == 'questions'" class="ion-ios-help"></i>&nbsp;{{item.word}}&nbsp;&nbsp; <i class="ion-ios-trash" ng-click="tags.splice($index, 1)"></i></span>
+	</ul>
+   
+</ion-content>

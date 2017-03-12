@@ -22,7 +22,9 @@ main ui-view {
 body .container {
 	position:relative;
 }
-
+.bar .title {
+	overflow:visible !important;
+}
 .login-page {
 	.logo {
 		text-align:center;
@@ -39,7 +41,7 @@ body .container {
 	}
 }
 .pane {
-	background-color:#f4f4f4 !important;
+	background-color:#ffffff !important;
 
 }
 .level-background {
@@ -49,4 +51,10 @@ body .container {
   border-radius: 50px;
   border: none;
   max-width:200px !important;
+}
+.label {
+	margin:3px;
+}
+.scroll-content {
+	    padding: 10px;
 }

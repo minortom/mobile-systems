@@ -82,6 +82,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/addinterests.html',
     controller: 'addInterestsController'
   })
+  // setup an abstract state for the tabs directive
+  .state('askquestion', {
+    url: '/ask-question',
+    templateUrl: 'templates/askquestion.html',
+    controller: 'askQuestionController'
+  })
   // Each tab has its own nav history stack:
 
   .state('tab.overview', {
