@@ -1,8 +1,8 @@
-app.controller('askQuestionController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', '$ionicPopup',function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $ionicPopup) {
+app.controller('askQuestionController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', '$ionicPopup', '$ionicHistory', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $ionicPopup, $ionicHistory) {
 	$scope.usersettings = store.get('userSettings');
 	
 
-	$scope.text = "";
+	$scope.text = null;
   
 
 	$scope.parseText = function(text) {
@@ -70,8 +70,13 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 		     title: 'Your question has been sent to five experts in that area!',
 		     template: 'You will get your answer quickly'
 		});
+		$scope.text = null;
+	   	$scope.tags = "";
 	   alertPopup.then(function(res) {
 	     $location.path('/tab/ask');
 	   });
 	}
+	$scope.myGoBack = function() {
+	    $ionicHistory.goBack();
+	  };
 }]);
