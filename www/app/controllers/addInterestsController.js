@@ -47,6 +47,54 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
 	$scope.finishSelection = function(query) {
 		store.set('selectedInterests', $scope.addedItems);
 		store.set('userSettings', {level : 2, asked : 5, answered : 4, correctlyAnswered: 3});
+		store.set('askAnswer', {
+			ask : [{
+				id: 1,
+				tags: [{word:"Real estate", kind:"nouns"}, {word:"shopping", kind: "verbs"}],
+				question: "Where do I find the best real estate with shopping areas?",
+				accepted: false,
+				spam: false,
+				timestamp: 1489398023,
+				answers:[]
+			},
+			{
+				id: 2,
+				tags: [{word:"People", kind: "verbs"}, {word:"Sports", kind: "nouns"}, {word:"Amsterdam", kind:"places"}],
+				question: "Where do you people all go for the best sports games in Amsterdam?",
+				accepted: true,
+				spam: false,
+				timestamp: 1489398042,
+				answers: [{
+					answer: "Maybe go to Amsterdam Arena",
+					accepted: true,
+					timestamp: 1489398050,
+					spam: false
+				},{
+					answer: "Maybe go to Amsterdam Arena",
+					accepted: false,
+					timestamp: 1489398050,
+					spam: false
+				}]
+			},
+			{
+				id: 3,
+				tags: [{word:"Food", kind: "nouns"}, {word:"drinks", kind: "nouns"}, {word: "Amsterdam", kind:"places"}],
+				question: "Where can you get the best food and drinks in Amsterdam?",
+				accepted: false,
+				spam: false,
+				timestamp: 1489397042,
+				answers:[]
+			}],
+			answers: [{
+				askId: 4,
+				tags: [{word:"Real estate", kind:"nouns"}, {word: "shopping", kind: "verbs"}, {word:"Amsterdam", kind: "places"}, {word:"Bijlmer", kind: "Places"}],
+				question: "You can find the best shopping places and real estate in Amsterdam Bijlmer",
+				accepted: false,
+				spam: false,
+				timestamp: 1489398023,
+			}]
+
+		});
 		$location.path('/tab/overview');
 	}
 	$scope.cancelButtonClickedMethod = function (callback) {
