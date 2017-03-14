@@ -12,11 +12,13 @@ app.controller('loginController', ['$scope','processApiCallService', 'apiService
         }, function(error) {
             alert("There was a problem getting your profile.  Check the logs for details.");
             console.log(error);
+            store.set('userSettings', {level : 2, asked : 5, answered : 4, correctlyAnswered: 3});
         });
 		 console.log(result);
 		 $location.url('/add-interests');
 		 }, function(error) {
 		 	alert("Auth Error..!!"+error);
+		 	store.set('userSettings', {level : 2, asked : 5, answered : 4, correctlyAnswered: 3});
 		 $location.url('/add-interests');
 		 });
 	};
