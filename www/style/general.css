@@ -1,1 +1,73 @@
-html{height:100%}body{height:100%;margin:0;background-color:#ffffff !important}ui-view,.container,main{height:inherit}main ui-view{height:100%}.center-all{top:50%;left:50%;transform:translate(-50%, -50%);position:absolute}body .container{position:relative}.bar .title{overflow:visible !important}.login-page .logo{text-align:center}.login-page .logo img{margin-top:50px;width:50%;max-width:200px;margin-left:auto;margin-right:auto}.login-page .services{text-align:center}.pane{background-color:#ffffff !important}.level-background{background:#ffc900;-webkit-border-radius:50px;-moz-border-radius:50px;border-radius:50px;border:none;max-width:200px !important}.label{margin:3px}.scroll-content{padding:10px}.highcharts-container{width:inherit !important}.highcharts-container svg{width:inherit !important}
+html {
+  height: 100%; }
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #ffffff !important; }
+
+ui-view, .container, main {
+  height: inherit; }
+
+main ui-view {
+  height: 100%; }
+
+.center-all {
+  top: 50%;
+  /* position the left edge of the element at the middle of the parent */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* This is a shorthand of */
+  position: absolute; }
+
+body .container {
+  position: relative; }
+
+.bar .title {
+  overflow: visible !important; }
+
+.login-page .logo {
+  text-align: center; }
+  .login-page .logo img {
+    margin-top: 50px;
+    width: 50%;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto; }
+
+.login-page .services {
+  text-align: center; }
+
+.pane {
+  background-color: #ffffff !important; }
+
+.level-background {
+  background: #ffc900;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  border: none;
+  max-width: 200px !important; }
+
+.levelOverview {
+  max-width: 400px !important; }
+
+.intermediate {
+  background: #ff9e00; }
+
+.advanced {
+  background: #ff6600; }
+
+.master {
+  background: #ff2e00; }
+
+.label {
+  margin: 3px; }
+
+.scroll-content {
+  padding: 10px; }
+
+.highcharts-container {
+  width: inherit !important; }
+  .highcharts-container svg {
+    width: inherit !important; }

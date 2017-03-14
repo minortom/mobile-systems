@@ -49,4 +49,8 @@ app.controller('overviewController', ['$scope','processApiCallService', 'apiServ
 		    }]
 		}
 	}
+
+  $scope.goToLevels = function(){
+    $location.url('/leveloverview');
+  };
 }]);
