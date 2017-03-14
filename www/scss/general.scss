@@ -76,3 +76,9 @@ body .container {
 .scroll-content {
 	    padding: 10px;
 }
+.highcharts-container {
+	width:inherit !important;
+	svg {
+		width:inherit !important;
+	}
+}
