@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', 
+var app = angular.module('starter',
   [
     'ionic',
     'ui-notification',
@@ -76,6 +76,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/login.html',
     controller: 'loginController'
   })
+
+  // setup an abstract state for the tabs directive
+  .state('leveloverview', {
+    url: '/leveloverview',
+    templateUrl: 'templates/leveloverview.html',
+    controller: 'levelOverviewController'
+  })
+
   // setup an abstract state for the tabs directive
   .state('addinterests', {
     url: '/add-interests',

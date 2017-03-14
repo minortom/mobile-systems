@@ -44,6 +44,7 @@ body .container {
 	background-color:#ffffff !important;
 
 }
+
 .level-background {
 	background:#ffc900;
 	-webkit-border-radius: 50px;
@@ -52,6 +53,23 @@ body .container {
   border: none;
   max-width:200px !important;
 }
+
+.levelOverview {
+  max-width:400px !important;
+}
+
+.intermediate {
+  background: #ff9e00;
+}
+
+.advanced {
+  background: #ff6600;
+}
+
+.master {
+  background: #ff2e00;
+}
+
 .label {
 	margin:3px;
 }
