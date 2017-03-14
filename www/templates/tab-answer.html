@@ -1,4 +1,21 @@
-<ion-view view-title="Answer">
-  <ion-content>
+<ion-view hide-nav-bar="true" view-title="Answer">
+  <ion-header-bar align-title="middle">
+    <h1 class="title">Answer</h1>
+    <div class="buttons">
+      <a class="button button-dark" href="#/leveloverview"><i class="ion-ribbon-b energized"></i>&nbsp;{{usersettings.level}}</a>
+    </div>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <div class="list card" ng-repeat="ask in askAnswer.ask | orderBy:'timestamp':true track by ask.id">
+
+      <div class="item item-body" ng-click="answerQuestion(ask.id)">
+        <h2 style="margin-top:0px;"><b> {{ask.question}}</b></h2>
+        <p><a href="#" class="subdued">{{ ask.answers.length }} answers</a><a href="#" class="subdued item-note">{{ask.timestamp * 1000 | date:'yyyy-MM-dd HH:mm'}}</a></p>
+      </div>
+
+      <div class="item item-body">
+      </div>
+
+    </div>
+
   </ion-content>
-</ion-view>

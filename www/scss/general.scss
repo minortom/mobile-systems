@@ -46,7 +46,7 @@ body .container {
 }
 
 .level-background {
-	background:#ffc900;
+	background: #ff7200;
 	-webkit-border-radius: 50px;
   -moz-border-radius: 50px;
   border-radius: 50px;
@@ -59,15 +59,17 @@ body .container {
 }
 
 .intermediate {
-  background: #ff9e00;
+  background: #ff9a00;
 }
 
 .advanced {
-  background: #ff6600;
+  background: #ffe900;
+
 }
 
 .master {
-  background: #ff2e00;
+  background: #c4ff00;
+
 }
 
 .fourtytwo {
@@ -88,5 +90,14 @@ body .container {
 }
 
 .leveltable {
+  margin-top: 20px;
+}
+
+.leveltable table, th, td {
   border: 1px solid black;
+}
+
+.backbutton {
+  font-size: 17px;
+  float: left;
 }
