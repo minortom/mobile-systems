@@ -73,4 +73,6 @@
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
   <icon src="resources/ios/icon/icon-small@3x.png"/>
+  <allow-navigation href="http://145.109.63.70:8101"/>
+  <allow-navigation href="http://145.109.63.70:8102"/>
 </widget>

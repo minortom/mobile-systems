@@ -46,7 +46,6 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
 	}
 	$scope.finishSelection = function(query) {
 		store.set('selectedInterests', $scope.addedItems);
-		store.set('userSettings', {level : 2, asked : 5, answered : 4, correctlyAnswered: 3});
 		store.set('askAnswer', {
 			ask : [{
 				id: 1,
