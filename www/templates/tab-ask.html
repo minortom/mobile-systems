@@ -5,7 +5,7 @@
   </div>
   <h1 class="title">Ask</h1>
   <div class="buttons">
-    <button class="button button-dark"><i class="ion-ribbon-b energized"></i>&nbsp;{{usersettings.level}}</button>
+    <a class="button button-dark" href="#/leveloverview"><i class="ion-ribbon-b energized"></i>&nbsp;{{usersettings.level}}</a>
   </div>
 </ion-header-bar>
 <ion-content class="has-header">
@@ -15,7 +15,7 @@
 	    	<h2 style="margin-top:0px;"><b> {{ask.question}}</b></h2>
 	    <p><a href="#" class="subdued">{{ ask.answers.length }} answers</a><a href="#" class="subdued item-note">{{ask.timestamp * 1000 | date:'yyyy-MM-dd HH:mm'}}</a></p>
 	  </div>
-	  <div class="item item-body">
+	  <div ng-if="ask.answers.length > 0" class="item item-body">
 	  </div>
 
 </div>
