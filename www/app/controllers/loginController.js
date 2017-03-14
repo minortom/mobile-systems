@@ -1,11 +1,24 @@
-app.controller('loginController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth) {
+app.controller('loginController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth','$http', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $http) {
+
 	$scope.LoginwithFacebook = function(){
 		 console.log("clicked");
-		 $cordovaOauth.facebook("180932542403431", ["email"]).then(function(result) {
+		 $cordovaOauth.facebook("180932542403431", ["email", "user_about_me", "user_likes"]).then(function(result) {
 		 alert("Auth Success..!!"+result);
+		 store.set('ouathFB', result);
+		 console.log(result);
+	  	$http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: result.access_token, fields: "id,name,gender,location,website,picture,relationship_status, likes", format: "json" }}).then(function(result) {
+            console.log(result.data);
+            store.set('userSettings', {level : 2, asked : 5, answered : 4, correctlyAnswered: 3, socialmedia: { facebook : result.data }});
+        }, function(error) {
+            alert("There was a problem getting your profile.  Check the logs for details.");
+            console.log(error);
+            store.set('userSettings', {level : 2, asked : 5, answered : 4, correctlyAnswered: 3});
+        });
+		 console.log(result);
 		 $location.url('/add-interests');
 		 }, function(error) {
 		 	alert("Auth Error..!!"+error);
+		 	store.set('userSettings', {level : 2, asked : 5, answered : 4, correctlyAnswered: 3});
 		 $location.url('/add-interests');
 		 });
 	};
