@@ -64,13 +64,25 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 			$scope.tags.push({kind: "adverb", word: data});
 		}
 		console.log($scope.tags);
-	}
+	};
 
 	$scope.askQuestion = function() {
 		var alertPopup = $ionicPopup.alert({
 		     title: 'Your question has been sent to five experts in that area!',
 		     template: 'You will get your answer quickly'
 		});
+
+    var data = {call: "newquestion", question: "new question here?", tags: "tag1,tag2"};
+
+    $.ajax({
+      type: "POST",
+      url: "http://www.bekerdesign.nl/fourtytwo/api.php",
+      data: data,
+      success: function (data) {
+        console.log(data);
+      }
+    });
+
 		$scope.text = null;
 	   	$scope.tags = "";
 	   alertPopup.then(function(res) {
