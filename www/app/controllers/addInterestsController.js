@@ -69,7 +69,7 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
 					timestamp: 1489398050,
 					spam: false
 				},{
-					answer: "Maybe go to Amsterdam Arena",
+					answer: "You could go to Rotterdam",
 					accepted: false,
 					timestamp: 1489398050,
 					spam: false
