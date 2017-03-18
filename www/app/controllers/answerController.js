@@ -3,7 +3,9 @@ app.controller('answerController', ['$scope','processApiCallService', 'apiServic
   $scope.askAnswer = store.get('askAnswer');
   $scope.totalLevel = store.get('totalLevel');
   $scope.answerQuestion = function(id) {
-    alert(id);
+    console.log(id);
+    store.set('currentQuestion', id);
+    $rootScope.currentId = id;
     $location.path('answer-question');
   }
 }]);

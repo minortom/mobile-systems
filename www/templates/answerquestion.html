@@ -9,7 +9,14 @@
   </div>
 </ion-header-bar>
 <ion-content class="has-header">
+    <div class="item item-body" style="margin-bottom:10px;">
+      <h2 style="margin-top:0px;"><b> {{currentQuestion.question}}</b></h2>
+    </div>
+
 	  <label class="item item-input">
 	    <textarea placeholder="Type your answer here" style="min-height:200px;"></textarea>
 	  </label>
+    <button class="button button-block button-balanced ion-ios-chatbubble" ng-click="answerQuestion()">
+      Answer this question
+    </button>
 </ion-content>
