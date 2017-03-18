@@ -29,20 +29,27 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
 	]
 	$scope.addedItems = [];
 	$scope.findInterest = function(query) {
+		var items = [];
 		if (query) {
-			var res = _.filter($scope.interests, function(i) {
-		        var match = i.category.match(query);
-		        return match;
-		    });
-		    var items = [];
-		    for (var i = 0, len = res.length; i < len; i++) {
-		    	items.push({id : res[i].id, name : res[i].category, view : res[i].category, level : 0});
-		    }
-            return {
-                items: items
-            };
+			var request = apiService["tagSearch"]("get", {
+                    ignoreDuplicateRequest: true,
+                }, null, "all", query, null).then(function(res) {
+                	if(res.data.success) {
+                	var res = res.data.data;
+                	res.forEach(function(item) {
+                		items.push({id : parseInt(item.id), name : item.tag, view : item.tag});
+                	});
+                	var returnValue = { items: items };
+                	console.log(returnValue);
+                	return returnValue;
+		        }
+                }).catch(function(response) {
+                       return {items: []};
+                });
+		
         }
-        return {items: []};
+        console.log(request);
+        return request;
 	};
 	$scope.finishSelection = function(query) {
 

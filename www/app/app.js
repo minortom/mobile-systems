@@ -176,9 +176,9 @@ app.run(['authService',
     }
 ]);
 
-var testingState = false; // Boolean to choose testing state or not
+var testingState = true; // Boolean to choose testing state or not
 if (testingState) {
-    var serviceBase = 'http://localhost/game/api/';
+    var serviceBase = 'http://localhost:8888/mobile-systems/www/api/';
     app.constant('ngAuthSettings', {
         apiServiceBaseUri: serviceBase,
     });

@@ -5,12 +5,12 @@ app.factory('apiService', ['$http', 'ngAuthSettings', '$resource', '$q', '$injec
         var serviceBase = ngAuthSettings.apiServiceBaseUri;
         var apiServiceFactory = {};
 
-        // Check the user
-        // var _userLoginCheck = function(request, options, params, sort, id, data) {
-        //     return apiHandlerService[request](apiHandlerService.getUrl("user/login/check", params, request, id, options), apiHandlerService.getOptions(options), data);
-        // }
+        // Search for tags in db
+        var _tagSearch = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("tag", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
 
-        // apiServiceFactory.userLoginCheck = _userLoginCheck;
+        apiServiceFactory.tagSearch = _tagSearch;
 
 
 
