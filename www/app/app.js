@@ -24,7 +24,7 @@ var app = angular.module('starter',
 ]);
 
 
-app.run(function($ionicPlatform) {
+app.run(function($ionicPlatform, $rootScope, $ionicHistory) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -37,6 +37,15 @@ app.run(function($ionicPlatform) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $rootScope.goBackState = function(){
+      $backView = $ionicHistory.backView();
+      $backView.go();
+    };
+
+    $rootScope.go = function ( path ) {
+      $location.path( path );
+    };
   });
 })
 
@@ -82,6 +91,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/leveloverview',
     templateUrl: 'templates/leveloverview.html',
     controller: 'levelOverviewController'
+  })
+
+  // setup an abstract state for the tabs directive
+  .state('answerquestion', {
+    url: '/answer-question',
+    templateUrl: 'templates/answerquestion.html',
+    controller: 'answerQuestionController'
   })
 
   // setup an abstract state for the tabs directive

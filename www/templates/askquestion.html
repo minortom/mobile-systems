@@ -27,5 +27,5 @@
 		<h1 style="text-align:center;" ng-if="tags.length > 0">Tags</h1>
 	   <span ng-repeat="item in tags" class="label" ng-class="{primary: item.kind == 'people', secondary: item.kind == 'places', success: item.kind == 'verbs', alert: item.kind == 'nouns', warning: item.kind == 'adjective'}"><i ng-if="item.kind == 'places'" class="ion-location"></i><i ng-if="item.kind == 'people'" class="ion-ios-people"></i><i ng-if="item.kind == 'questions'" class="ion-ios-help"></i>&nbsp;{{item.word}}&nbsp;&nbsp; <i class="ion-ios-trash" ng-click="tags.splice($index, 1)"></i></span>
 	</ul>
-   
+
 </ion-content>

@@ -1,9 +1,10 @@
 app.controller('askQuestionController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', '$ionicPopup', '$ionicHistory', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $ionicPopup, $ionicHistory) {
 	$scope.usersettings = store.get('userSettings');
-	
+
+  $scope.totalLevel = store.get('totalLevel');
 
 	$scope.text = null;
-  
+
 
 	$scope.parseText = function(text) {
 		//parse the text
@@ -34,7 +35,7 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 		var nouns = nouns.out('array');
 		var adjectives = adjectives.out('array');
 		var adverb = adverb.out('array');
-	
+
 		$scope.tags = [];
 		for(var i = 0; i < people.length; i++) {
 			var data = people[i];
@@ -63,13 +64,25 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 			$scope.tags.push({kind: "adverb", word: data});
 		}
 		console.log($scope.tags);
-	}
-	
+	};
+
 	$scope.askQuestion = function() {
 		var alertPopup = $ionicPopup.alert({
 		     title: 'Your question has been sent to five experts in that area!',
 		     template: 'You will get your answer quickly'
 		});
+
+    var data = {call: "newquestion", question: "new question here?", tags: "tag1,tag2"};
+
+    $.ajax({
+      type: "POST",
+      url: "http://www.bekerdesign.nl/fourtytwo/api.php",
+      data: data,
+      success: function (data) {
+        console.log(data);
+      }
+    });
+
 		$scope.text = null;
 	   	$scope.tags = "";
 	   alertPopup.then(function(res) {

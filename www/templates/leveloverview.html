@@ -1,13 +1,36 @@
-<ion-view view-title="Level Overview">
+<ion-view hide-nav-bar="true" view-title="Level Overview">
+  <ion-header-bar align-title="middle">
+    <button ng-click="goBackState()">Back</button>
+    <h1 class="title">Level Overview</h1>
+    <div class="buttons">
+      <a class="button button-dark" href="#/leveloverview"><i class="ion-ribbon-b energized"></i>&nbsp;{{totalLevel}}</a>
+    </div>
+  </ion-header-bar>
+
   <ion-content>
     <div class="text-center">
-      <div class="buttons">
-        <a class="button button-dark" href="#/tab/overview">Back</a>
-      </div>
-    </div>
+      You can earn levels for your interests by performing different actions as shown below. The levels you gain are gained per interest.
 
-    <div class="text-center">
-      You can earn levels by answering questions, posting questions and selecting the correct answers.
+      <div class="leveltable">
+        <table class="text-left">
+          <tr>
+            <td>Answer a question</td>
+            <td>+1 level</td>
+          </tr>
+          <tr>
+            <td>Get an answer chosen as best answer</td>
+            <td>+2 levels</td>
+          </tr>
+          <tr>
+            <td>Choose an answer as best answer</td>
+            <td>+1 level</td>
+          </tr>
+          <tr>
+            <td>Get an answer marked as spam</td>
+            <td>-2 levels</td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <br>
@@ -27,7 +50,7 @@
       <div class="col">
         <div class="text-center">
           <h1 class="center"><i class="button button-icon icon ion-ribbon-b "></i><br>Beginner<br></h1>
-          <h4>Level 0 - 5</h4>
+          <h4>2 questions</h4>
         </div>
       </div>
     </div>
@@ -38,7 +61,8 @@
       <div class="col">
         <div class="text-center">
           <h1 class="center"><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><br>Intermediate<br></h1>
-          <h4>Level 5 - 10</h4>
+          <h5>Level 10</h5>
+          <h4>+5 questions</h4>
         </div>
       </div>
     </div>
@@ -49,7 +73,8 @@
       <div class="col">
         <div class="text-center">
           <h1 class="center"><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><br>Advanced<br></h1>
-          <h4>Level 10 - 15</h4>
+          <h5>Level 20</h5>
+          <h4>+10 questions</h4>
         </div>
       </div>
     </div>
@@ -60,9 +85,23 @@
       <div class="col">
         <div class="text-center">
           <h1 class="center"><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><br>Master<br></h1>
-          <h4>Level 15+</h4>
+          <h5>Level 30</h5>
+          <h4>10 questions per week</h4>
         </div>
       </div>
     </div>
+
+    <br>
+
+    <div class="row level-background fourtytwo levelOverview">
+      <div class="col">
+        <div class="text-center">
+          <h1 class="center"><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><i class="button button-icon icon ion-ribbon-b "></i><br>42<br></h1>
+          <h5>Level 42</h5>
+          <h4>Unlimited questions</h4>
+        </div>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>

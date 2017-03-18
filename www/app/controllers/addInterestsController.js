@@ -36,16 +36,28 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
 		    });
 		    var items = [];
 		    for (var i = 0, len = res.length; i < len; i++) {
-		    	items.push({id : res[i].id, name : res[i].category, view : res[i].category});
+		    	items.push({id : res[i].id, name : res[i].category, view : res[i].category, level : 0});
 		    }
             return {
                 items: items
             };
         }
         return {items: []};
-	}
+	};
 	$scope.finishSelection = function(query) {
-		store.set('selectedInterests', $scope.addedItems);
+
+    $scope.addedItems[0].level = 2;
+    $scope.addedItems[1].level = 0;
+    $scope.addedItems[2].level = 4;
+    $scope.addedItems[3].level = 1;
+    $scope.totalLevel = 0;
+    $scope.addedItems.forEach(function(item) {
+      $scope.totalLevel += item.level;
+    });
+
+    store.set('selectedInterests', $scope.addedItems);
+    store.set('totalLevel', $scope.totalLevel);
+
 		store.set('askAnswer', {
 			ask : [{
 				id: 1,
@@ -111,5 +123,5 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
 	   }
 	}
 
-	
+
 }]);
