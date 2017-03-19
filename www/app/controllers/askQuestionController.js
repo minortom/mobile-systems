@@ -111,6 +111,7 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 	     $rootScope.$emit('refr');
 	   });
 	}
+	
 	$scope.myGoBack = function() {
 	    $ionicHistory.goBack();
 	  };

@@ -40,4 +40,7 @@ app.controller('askController', ['$scope','processApiCallService', 'apiService',
 	 $rootScope.$on('refr', function() {
        $scope.loadAskList(); // load data from $http
    });
+	 $timeout(function () {
+        $scope.loadAskList(); // load data from $http
+    }, 10000);
 }]);
