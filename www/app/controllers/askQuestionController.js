@@ -1,13 +1,14 @@
 app.controller('askQuestionController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', '$ionicPopup', '$ionicHistory', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $ionicPopup, $ionicHistory) {
-	$scope.usersettings = store.get('userSettings');
+	var userSettings = store.get('userSettings');
 
-  $scope.totalLevel = store.get('totalLevel');
+  	$scope.totalLevel = store.get('totalLevel');
 
 	$scope.text = null;
 
 
 	$scope.parseText = function(text) {
 		//parse the text
+		$scope.text = text;
 		var r = window.nlp(text)
 
 		//grab the person names mentioned in this text
@@ -67,26 +68,37 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 	};
 
 	$scope.askQuestion = function() {
+		console.log($scope.text);
+		console.log($scope.tags);
+		apiService["postAsk"]("post", {
+        	ignoreDuplicateRequest: true,
+	    }, null, "all", null, {fbid:userSettings.login.fbid, message: $scope.text }).then(function(res) {
+	    	var tags = [];
+	    	$scope.tags.forEach(function(item) {
+	    		if(!tags[item.word]) {
+                	tags.push(item.word);
+                }
+            });
+	    	apiService["postAskTags"]("post", {
+	        	ignoreDuplicateRequest: true,
+		    }, null, "all", null, {askid:res.data.data, tags: tags }).then(function(res) {
+		    	$scope.text = null;
+	   			$scope.tags = "";
+		    }).catch(function(response) {
+		    	
+		    });
+	    }).catch(function(response) {
+	    	
+	    });
 		var alertPopup = $ionicPopup.alert({
 		     title: 'Your question has been sent to five experts in that area!',
 		     template: 'You will get your answer quickly'
 		});
 
-    var data = {call: "newquestion", question: "new question here?", tags: "tag1,tag2"};
-
-    $.ajax({
-      type: "POST",
-      url: "http://www.bekerdesign.nl/fourtytwo/api.php",
-      data: data,
-      success: function (data) {
-        console.log(data);
-      }
-    });
-
-		$scope.text = null;
-	   	$scope.tags = "";
+		
 	   alertPopup.then(function(res) {
 	     $location.path('/tab/ask');
+	     $rootScope.$emit('refr');
 	   });
 	}
 	$scope.myGoBack = function() {

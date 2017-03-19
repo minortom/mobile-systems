@@ -12,7 +12,54 @@ app.factory('apiService', ['$http', 'ngAuthSettings', '$resource', '$q', '$injec
 
         apiServiceFactory.tagSearch = _tagSearch;
 
+        // Submit user
+        var _postUser = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("user/new", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
 
+        apiServiceFactory.postUser = _postUser;
+
+        // Submit user tags
+        var _postUserTags = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("user/tags", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.postUserTags = _postUserTags;
+
+        // Get user tags
+        var _getUserTags = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("user/tags/get", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.getUserTags = _getUserTags;
+
+        // Post question
+        var _postAsk = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("ask/new", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.postAsk = _postAsk;
+
+        // Submit question tags
+        var _postAskTags = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("ask/tags", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.postAskTags = _postAskTags;
+
+        // Submit question tags
+        var _getUserAsk = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("user/ask", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.getUserAsk = _getUserAsk;
+
+        // Submit question tags
+        var _getUserAnswer = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("user/answer", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.getUserAnswer = _getUserAnswer;
 
         return apiServiceFactory;
 

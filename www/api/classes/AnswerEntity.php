@@ -2,7 +2,8 @@
 
 class AnswerEntity
 {
-    protected $search;
+    protected $fbid;
+    protected $askid;
 
     /**
      * Accept an array of data matching properties of this class
@@ -10,19 +11,27 @@ class AnswerEntity
      *
      * @param array $data The data to use to create
      */
-    public function __construct($data, $args) {
+    public function __construct($data) {
         // no id if we're creating
     
-      
-        if(isset($args['search'])) {
-            $this->search = filter_var($args['search'], FILTER_SANITIZE_STRING);
+        $body = $data->getParsedBody();
+        if(isset($body['fbid'])) {
+            $this->fbid = filter_var($body['fbid'], FILTER_SANITIZE_STRING);
         } else {
-            $this->search = false;
+            $this->fbid = false;
+        }
+        if(isset($body['askid'])) {
+            $this->askid = filter_var($body['askid'], FILTER_SANITIZE_STRING);
+        } else {
+            $this->askid = false;
         }
        
     }
 
-    public function getSearch() {
-        return $this->search;
+    public function getFbid() {
+        return $this->fbid;
+    }
+    public function getAskid() {
+        return $this->askid;
     }
 }

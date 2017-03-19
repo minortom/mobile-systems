@@ -1,5 +1,18 @@
 <?php 
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    //header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+    header("Access-Control-Allow-Origin: *");
+    header('Access-Control-Allow-Credentials: true');    
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); 
+}   
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");         
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+        header("Access-Control-Allow-Headers:{$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 
+    exit(0);
+} 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -62,7 +75,7 @@ $app->get('/tag/{search}', function (Request $request, Response $response, $args
 ****** Users ******
 ********************/
 
-// Get tag
+// Post new user
 $app->post('/user/new', function (Request $request, Response $response){
     // Check if login is correct first if not return 401
 
@@ -77,5 +90,97 @@ $app->post('/user/new', function (Request $request, Response $response){
     }
     return $newResponse;
 });
+// Post user tags
+$app->post('/user/tags', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+
+    $user = new UserEntity($request);
+    $user_mapper = new UserMapper($this->db);
+    $queryResponse = $user_mapper->postUserTags($user);
+    if($queryResponse['success']) {
+        $newResponse = $response->withJson($queryResponse);
+    } else {
+        $newResponse = $response->withStatus(401);
+        $newResponse = $newResponse->withJson($queryResponse);
+    }
+    return $newResponse;
+});
+// Get user tags
+$app->post('/user/tags/get', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+
+    $user = new UserEntity($request);
+    $user_mapper = new UserMapper($this->db);
+    $queryResponse = $user_mapper->getUserTags($user);
+    $newResponse = $response->withJson($queryResponse);
+    return $newResponse;
+});
+
+/*******************
+****** Ask ******
+********************/
+
+// Post question
+$app->post('/ask/new', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+    $ask = new AskEntity($request);
+    $ask_mapper = new AskMapper($this->db);
+    $queryResponse = $ask_mapper->postAsk($ask);
+    if($queryResponse['success']) {
+        $newResponse = $response->withJson($queryResponse);
+    } else {
+        $newResponse = $response->withStatus(401);
+        $newResponse = $newResponse->withJson($queryResponse);
+    }
+    return $newResponse;
+});
+// Post question tags
+$app->post('/ask/tags', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+
+    $ask = new AskEntity($request);
+    $ask_mapper = new AskMapper($this->db);
+    $queryResponse = $ask_mapper->postAskTags($ask);
+    if($queryResponse['success']) {
+        $newResponse = $response->withJson($queryResponse);
+    } else {
+        $newResponse = $response->withStatus(401);
+        $newResponse = $newResponse->withJson($queryResponse);
+    }
+    return $newResponse;
+});
+// Post question tags
+$app->post('/user/ask', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+
+    $ask = new AskEntity($request);
+    $ask_mapper = new AskMapper($this->db);
+    $queryResponse = $ask_mapper->getUserAsk($ask);
+    $newResponse = $response->withJson($queryResponse);
+    return $newResponse;
+});
+
+$app->post('/user/answer', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+
+    $answer = new AnswerEntity($request);
+    $answer_mapper = new AnswerMapper($this->db);
+    $queryResponse = $answer_mapper->getUserAnswer($answer);
+    $newResponse = $response->withJson($queryResponse);
+    return $newResponse;
+});
+
+
+// Post question tags
+$app->post('/ask/match', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+
+    $ask = new AskEntity($request);
+    $ask_mapper = new AskMapper($this->db);
+    $queryResponse = $ask_mapper->findBestMatch($ask);
+    $newResponse = $response->withJson($queryResponse);
+    return $newResponse;
+});
 $app->run();
+
 ?>

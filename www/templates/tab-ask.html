@@ -9,14 +9,19 @@
   </div>
 </ion-header-bar>
 <ion-content class="has-header">
-   <div class="list card" ng-repeat="ask in askAnswer.ask | orderBy:'timestamp':true track by ask.id">
+	<div ng-if="!(askList.length > 0)"class="card">
+	  <div class="item item-text-wrap">
+	    No questions asked yet..
+	  </div>
+	</div>
+   <div class="list card" ng-repeat="ask in askList | orderBy:'date':true track by ask.id">
 
 	  <div class="item item-body">
-	    	<h2 style="margin-top:0px;"><b> {{ask.question}}</b></h2>
-	    <p><a class="subdued" ng-click="ask.open = !ask.open">{{ ask.answers.length }} answers</a><a href="#" class="subdued item-note">{{ask.timestamp * 1000 | date:'yyyy-MM-dd HH:mm'}}</a></p>
+	    	<h2 style="margin-top:0px;"><b> {{ask.message}}</b></h2>
+	    <p><a class="subdued" ng-click="ask.open = !ask.open">{{ ask.answers.length }} answers</a><a href="#" class="subdued item-note">{{ask.date | date:'yyyy-MM-dd HH:mm'}}</a></p>
 	  </div>
-	  <div ng-if="ask.answers.length > 0" ng-click="ask.open = !ask.open" ng-repeat="answer in ask.answers" ng-show="ask.open"class="item item-body">
-	  	<h2 style="margin-top:0px;"><b> {{answer.answer}}</b></h2>
+	  <div ng-if="ask.open" ng-click="ask.open = !ask.open" ng-repeat="answer in ask.answers" ng-show="ask.open"class="item item-body">
+	  	<h2 style="margin-top:0px;"><b> {{answer.message}}</b></h2>
 	  </div>
 
 </div>

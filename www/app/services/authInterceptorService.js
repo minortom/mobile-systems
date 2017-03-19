@@ -111,7 +111,7 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'store', 
             var deferred = $q.defer();
             if (rejection.status === 401) { // Unauthorized access. 
                 errorResponse = false;
-                $location.path('/search').search({game: gameData.gameId});
+                $location.path('/login');
             }
             if (!errorResponse) {
 

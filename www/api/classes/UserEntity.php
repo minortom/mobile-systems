@@ -3,9 +3,9 @@
 class UserEntity
 {
     protected $fbid;
-    protected $username;
+    protected $url;
     protected $name;
-
+    protected $likes;
     /**
      * Accept an array of data matching properties of this class
      * and create the class
@@ -15,21 +15,25 @@ class UserEntity
     public function __construct($data) {
         // no id if we're creating
         $body = $data->getParsedBody();
-      
         if(isset($body['fbid'])) {
-            $this->fbid = filter_var($body['fbid'], FILTER_SANITIZE_STRING);
+            $this->fbid = $body['fbid'];
         } else {
             $this->fbid = false;
         }
-        if(isset($body['username'])) {
-            $this->username = filter_var($body['username'], FILTER_SANITIZE_STRING);
+        if(isset($body['url'])) {
+            $this->url = filter_var($body['url'], FILTER_SANITIZE_STRING);
         } else {
-            $this->username = false;
+            $this->url = false;
         }
         if(isset($body['name'])) {
             $this->name = filter_var($body['name'], FILTER_SANITIZE_STRING);
         } else {
             $this->name = false;
+        }
+        if(isset($body['likes'])) {
+            $this->likes = $body['likes'];
+        } else {
+            $this->likes = false;
         }
        
     }
@@ -37,10 +41,13 @@ class UserEntity
     public function getFbid() {
         return $this->fbid;
     }
-    public function getUsername() {
-        return $this->username;
+    public function getUrl() {
+        return $this->url;
     }
     public function getName() {
         return $this->name;
+    }
+    public function getLikes() {
+        return $this->likes;
     }
 }
