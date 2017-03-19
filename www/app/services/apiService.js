@@ -61,6 +61,30 @@ app.factory('apiService', ['$http', 'ngAuthSettings', '$resource', '$q', '$injec
 
         apiServiceFactory.getUserAnswer = _getUserAnswer;
 
+         // Submit question tags
+        var _postUserAnswer = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("user/answer/new", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.postUserAnswer = _postUserAnswer;
+
+         // Submit question tags
+        var _postUserAnswerAccept = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("user/answer/accept", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.postUserAnswerAccept = _postUserAnswerAccept;
+        
+
+        // Submit question tags
+        var _postAskMatch = function(request, options, params, sort, id, data) {
+            return apiHandlerService[request](apiHandlerService.getUrl("ask/match", params, request, id, options), apiHandlerService.getOptions(options), data);
+        }
+
+        apiServiceFactory.postAskMatch = _postAskMatch;
+
+        
+
         return apiServiceFactory;
 
     }

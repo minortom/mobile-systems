@@ -13,12 +13,22 @@
     </div>
      <div class="list card" ng-repeat="answer in answerList | orderBy:'date':true track by answer.id">
 
-      <div class="item item-body">
+      <div class="item item-avatar item-text-wrap">
+        <img ng-src="{{answer.image}}">
           <h2 style="margin-top:0px;"><b> {{answer.message}}</b></h2>
-        <p><a class="subdued" ng-click="answer.open = !answer.open">{{ answer.answers.length }} answers</a><a href="#" class="subdued item-note">{{answer.date | date:'yyyy-MM-dd HH:mm'}}</a></p>
+          <p>Posted by <i>{{answer.name}}</i><br>at <i>{{answer.date | date:'yyyy-MM-dd HH:mm'}}</i></p>
       </div>
-      <div ng-if="answer.open" ng-click="answer.open = !answer.open" ng-repeat="answer in answer.answers" ng-show="answer.open"class="item item-body">
-        <h2 style="margin-top:0px;"><b> {{answer.message}}</b></h2>
+      <div class="item">
+        <p><a class="subdued" ng-click="answer.open = !answer.open">{{ answer.answers.length }} answer(s)</a><a class="button item-note button-small button-balanced" ng-click="answerQuestion(answer.id, answer.message)">Answer question</a></p>
+      </div>
+      <div ng-if="answer.open" ng-click="answer.open = !answer.open" ng-repeat="answerr in answer.answers" ng-show="answer.open" class="item item-body">
+         <div class="item item-avatar item-text-wrap">
+        <img ng-src="{{answerr.image}}">
+        
+          <p style="margin-top:0px;"><b> {{answerr.message}}</b></p>
+          <p>Posted by <i>{{answerr.name}}</i><br>at <i>{{answerr.date | date:'yyyy-MM-dd HH:mm'}}</i></p>
+          <p><button ng-if="answerr.accepted == 1" class="button item-note button-small button-outline button-balanced">Accepted by {{answer.name}}</button></p>
+      </div>
       </div>
 
   </div>

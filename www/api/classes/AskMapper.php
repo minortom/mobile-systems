@@ -65,13 +65,13 @@ class AskMapper extends Mapper
             return  array("success"=>false, "message"=>"Forgot some params");
         }
         
-        $stmt = $this->db->prepare("SELECT * FROM ask WHERE userId = :fbid ORDER BY date DESC");
+        $stmt = $this->db->prepare("SELECT *, (SELECT url FROM user WHERE id = :fbid) AS image, (SELECT name FROM user WHERE id = :fbid) AS name FROM ask WHERE userId = :fbid ORDER BY date DESC");
         $stmt->execute(array(':fbid'=>$fbid));
         $result = $stmt->fetchAll();
         if (!empty($result) ) {
             $count = 0;
             foreach ($result as $ask) {
-                $stmt = $this->db->prepare("SELECT * FROM answer WHERE askId = :id");
+                $stmt = $this->db->prepare("SELECT *, (SELECT url FROM user WHERE user.id = answer.userId) AS image, (SELECT name FROM user WHERE user.id = answer.userId) AS name FROM answer WHERE askId = :id");
                 $stmt->execute(array(':id'=>$ask['id']));
                 $answer = $stmt->fetchAll();
                 $result[$count]['answers'] = $answer;

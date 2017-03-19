@@ -16,14 +16,23 @@
 	</div>
    <div class="list card" ng-repeat="ask in askList | orderBy:'date':true track by ask.id">
 
-	  <div class="item item-body">
-	    	<h2 style="margin-top:0px;"><b> {{ask.message}}</b></h2>
-	    <p><a class="subdued" ng-click="ask.open = !ask.open">{{ ask.answers.length }} answers</a><a href="#" class="subdued item-note">{{ask.date | date:'yyyy-MM-dd HH:mm'}}</a></p>
-	  </div>
-	  <div ng-if="ask.open" ng-click="ask.open = !ask.open" ng-repeat="answer in ask.answers" ng-show="ask.open"class="item item-body">
-	  	<h2 style="margin-top:0px;"><b> {{answer.message}}</b></h2>
-	  </div>
+      <div class="item item-avatar item-text-wrap">
+        <img ng-src="{{ask.image}}">
+        <h2 style="margin-top:0px;"><b> {{ask.message}}</b></h2>
+          <p>Posted by <i>{{ask.name}}</i><br>at <i>{{ask.date | date:'yyyy-MM-dd HH:mm'}}</i></p>
+         
+      </div>
+      <div class="item">
+        <p><a class="subdued" ng-click="ask.open = !ask.open">{{ ask.answers.length }} answer(s)</a></p>
+      </div>
+      <div ng-if="ask.open" ng-click="ask.open = !ask.open" ng-repeat="answer in ask.answers" ng-show="ask.open" class="item item-body">
+         <div class="item item-avatar item-text-wrap">
+        <img ng-src="{{answer.image}}">
+          <p style="margin-top:0px;"><b> {{answer.message}}</b></p>
+          <p>Posted by <i>{{answer.name}}</i><br>at <i>{{answer.date | date:'yyyy-MM-dd HH:mm'}}</i></p><button class="button item-note button-small button-balanced" ng-click="acceptAnswer(answer.id)" ng-disabled="answer.accepted == '1'">Accept answer</button>
+      </div>
+      </div>
 
-</div>
+  </div>
 
 </ion-content>

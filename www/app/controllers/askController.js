@@ -15,6 +15,27 @@ app.controller('askController', ['$scope','processApiCallService', 'apiService',
 	    	
 	    });
 	}
+	$scope.acceptAnswer = function(id) {
+		
+		apiService["postUserAnswerAccept"]("post", {
+	    	ignoreDuplicateRequest: true,
+	    }, null, "all", null, {answerid:id }).then(function(res) {
+	    	if(res.data.success) {
+	    		console.log("success");
+	    		var alertPopup = $ionicPopup.alert({
+				     title: 'You accepted this question!',
+				     template: 'Good job!'
+				});
+
+				
+			   alertPopup.then(function(res) {
+			      $scope.loadAskList(); // load data from $http
+			   });
+	    	}
+	    }).catch(function(response) {
+	    	
+	    });
+	}
 	$scope.loadAskList();
 	 $rootScope.$on('refr', function() {
        $scope.loadAskList(); // load data from $http

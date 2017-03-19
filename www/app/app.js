@@ -95,7 +95,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   // setup an abstract state for the tabs directive
   .state('answerquestion', {
-    url: '/answer-question',
+    url: '/answer-question?id&question',
     templateUrl: 'templates/answerquestion.html',
     controller: 'answerQuestionController'
   })
@@ -176,14 +176,14 @@ app.run(['authService',
     }
 ]);
 
-var testingState = true; // Boolean to choose testing state or not
+var testingState = false; // Boolean to choose testing state or not
 if (testingState) {
     var serviceBase = 'http://localhost:8888/mobile-systems/www/api/';
     app.constant('ngAuthSettings', {
         apiServiceBaseUri: serviceBase,
     });
 } else {
-    var serviceBase = 'https://www.creativeforce.nl/game/api/';
+    var serviceBase = 'https://www.creativeforce.nl/42/api/';
     app.constant('ngAuthSettings', {
         apiServiceBaseUri: serviceBase,
     });

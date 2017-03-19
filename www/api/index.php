@@ -22,9 +22,9 @@ spl_autoload_register(function ($classname) {
 });
 
 $config['displayErrorDetails'] = true;
-$config['db']['host']   = "localhost:8889";
-$config['db']['user']   = "root";
-$config['db']['pass']   = "root";
+$config['db']['host']   = "localhost:3306";
+$config['db']['user']   = "42";
+$config['db']['pass']   = "H0at!i91";
 $config['db']['dbname'] = "42";
 
 
@@ -166,6 +166,26 @@ $app->post('/user/answer', function (Request $request, Response $response){
     $answer = new AnswerEntity($request);
     $answer_mapper = new AnswerMapper($this->db);
     $queryResponse = $answer_mapper->getUserAnswer($answer);
+    $newResponse = $response->withJson($queryResponse);
+    return $newResponse;
+});
+
+$app->post('/user/answer/accept', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+
+    $answer = new AnswerEntity($request);
+    $answer_mapper = new AnswerMapper($this->db);
+    $queryResponse = $answer_mapper->postAcceptAnswer($answer);
+    $newResponse = $response->withJson($queryResponse);
+    return $newResponse;
+});
+
+$app->post('/user/answer/new', function (Request $request, Response $response){
+    // Check if login is correct first if not return 401
+
+    $answer = new AnswerEntity($request);
+    $answer_mapper = new AnswerMapper($this->db);
+    $queryResponse = $answer_mapper->postUserAnswer($answer);
     $newResponse = $response->withJson($queryResponse);
     return $newResponse;
 });

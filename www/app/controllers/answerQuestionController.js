@@ -1,21 +1,29 @@
-app.controller('answerQuestionController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', '$ionicPopup', '$ionicHistory', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $ionicPopup, $ionicHistory) {
-  $scope.usersettings = store.get('userSettings');
+app.controller('answerQuestionController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', '$ionicPopup', '$ionicHistory', '$stateParams', function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $ionicPopup, $ionicHistory, $stateParams) {
+  var userSettings = store.get('userSettings');
+  var id = $stateParams.id;
+  var question = $stateParams.question;
+  $scope.currentQuestion = question;
 
-  $scope.totalLevel = store.get('totalLevel');
-  $scope.askAnswer = store.get('askAnswer');
-  $scope.currentId = store.get('currentQuestion');
+  $scope.answerQuestion = function(text) {
+    
+    apiService["postUserAnswer"]("post", {
+    	ignoreDuplicateRequest: true,
+    }, null, "all", null, {fbid:userSettings.login.fbid, message: text, askid: id }).then(function(res) {
+    	if(res.data.success) {
+    		var alertPopup = $ionicPopup.alert({
+			     title: 'You answered this question',
+			     template: 'Maybe it will be accepted by the user'
+			});
 
-  console.log($scope.askAnswer);
-  console.log($rootScope.currentId);
-
-  $scope.askAnswer.ask.forEach(function (item) {
-    if (item.id == $rootScope.currentId) {
-      $scope.currentQuestion = item;
-    }
-  });
-
-  $scope.answerQuestion = function() {
-    alert('hey');
+			
+		   alertPopup.then(function(res) {
+		     $location.path('/tab/answer');
+		     $rootScope.$emit('refr');
+		   });
+    	}
+    }).catch(function(response) {
+    	
+    });
   }
 
 }]);

@@ -1,10 +1,7 @@
 app.controller('answerController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', '$ionicPopup',function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $ionicPopup) {
   var userSettings = store.get('userSettings');
-  $scope.answerQuestion = function(id) {
-    console.log(id);
-    store.set('currentQuestion', id);
-    $rootScope.currentId = id;
-    $location.path('answer-question');
+  $scope.answerQuestion = function(id, question) {
+    $location.path('answer-question').search({question: question, id: id});
   }
   $scope.loadAnswerList = function() {
 		apiService["getUserAnswer"]("post", {
@@ -17,4 +14,10 @@ app.controller('answerController', ['$scope','processApiCallService', 'apiServic
 	    });
 	}
 	$scope.loadAnswerList();
+	$rootScope.$on('refr', function() {
+       $scope.loadAnswerList(); // load data from $http
+   });
+	$timeout(function () {
+        $scope.loadAnswerList(); // load data from $http
+    }, 10000);
 }]);

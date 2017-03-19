@@ -4,6 +4,8 @@ class AnswerEntity
 {
     protected $fbid;
     protected $askid;
+    protected $message;
+    protected $answerid;
 
     /**
      * Accept an array of data matching properties of this class
@@ -25,6 +27,16 @@ class AnswerEntity
         } else {
             $this->askid = false;
         }
+        if(isset($body['answerid'])) {
+            $this->answerid = filter_var($body['answerid'], FILTER_SANITIZE_STRING);
+        } else {
+            $this->answerid = false;
+        }
+        if(isset($body['message'])) {
+            $this->message = $body['message'];
+        } else {
+            $this->message = false;
+        }
        
     }
 
@@ -33,5 +45,11 @@ class AnswerEntity
     }
     public function getAskid() {
         return $this->askid;
+    }
+    public function getMessage() {
+        return $this->message;
+    }
+    public function getAnswerid() {
+        return $this->answerid;
     }
 }

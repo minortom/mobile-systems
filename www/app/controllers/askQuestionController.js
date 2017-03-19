@@ -68,22 +68,32 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 	};
 
 	$scope.askQuestion = function() {
-		console.log($scope.text);
-		console.log($scope.tags);
+		
 		apiService["postAsk"]("post", {
         	ignoreDuplicateRequest: true,
 	    }, null, "all", null, {fbid:userSettings.login.fbid, message: $scope.text }).then(function(res) {
 	    	var tags = [];
 	    	$scope.tags.forEach(function(item) {
 	    		if(!tags[item.word]) {
-                	tags.push(item.word);
+	    			var str = item.word;
+                    var words = str.split(" ");
+                    words.forEach(function(items) {
+                         tags.push(items);
+                    })
                 }
             });
+            var askid = res.data.data;
 	    	apiService["postAskTags"]("post", {
 	        	ignoreDuplicateRequest: true,
-		    }, null, "all", null, {askid:res.data.data, tags: tags }).then(function(res) {
-		    	$scope.text = null;
-	   			$scope.tags = "";
+		    }, null, "all", null, {askid:askid, tags: tags }).then(function(res) {
+		    	apiService["postAskMatch"]("post", {
+		        	ignoreDuplicateRequest: true,
+			    }, null, "all", null, {askid:askid }).then(function(res) {
+			    	$scope.text = null;
+		   			$scope.tags = "";
+			    }).catch(function(response) {
+			    	
+			    });
 		    }).catch(function(response) {
 		    	
 		    });

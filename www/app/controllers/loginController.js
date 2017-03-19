@@ -4,10 +4,13 @@ app.controller('loginController', ['$scope','processApiCallService', 'apiService
             if(data.paging.next) {
                 console.log("1")
                 $http.get(data.paging.next, { params: { access_token: token, format: "json" }}).then(function(response) {
-                    console.log("ZZZZZZZ")
                     var likes = [];
                     response.data.data.forEach(function(item) {
-                        likes.push(item.name);
+                        var str = item.name;
+                        var words = str.split(" ");
+                        words.forEach(function(items) {
+                             likes.push(items);
+                        })
                     });
                     apiService["postUserTags"]("post", {
                         ignoreDuplicateRequest: true,
