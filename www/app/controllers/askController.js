@@ -2,6 +2,8 @@ app.controller('askController', ['$scope','processApiCallService', 'apiService',
 	var userSettings = store.get('userSettings');
 	$scope.askList = [];
   	$scope.totalLevel = store.get('totalLevel');
+  	var listCount = 0;
+  	var previousData;
 	$scope.askQuestion = function() {
 		$location.path('ask-question');
 	}
@@ -9,8 +11,21 @@ app.controller('askController', ['$scope','processApiCallService', 'apiService',
 		apiService["getUserAsk"]("post", {
 	    	ignoreDuplicateRequest: true,
 	    }, null, "all", null, {fbid:userSettings.login.fbid }).then(function(res) {
-	    	console.log(res);
-	    	$scope.askList = res.data.data;
+	    	console.log(res)
+	    	if(res.data) {
+		    	if(res.data.data) {
+		    		$scope.askList = res.data.data;
+		    		if(res.data.data !== previousData) {
+				    	if(res.data.data.length > listCount && listCount != 0) {
+				    		var badgeAlerts = store.get("badgeAlerts");
+				    		badgeAlerts.askBadge = res.data.data.length - listCount;
+				    		previousData = res.data.data;
+				    		store.set("badgeAlerts", badgeAlerts);
+				    		listCount = res.data.data.length;
+				    	}
+				    }
+			    }
+			}
 	    }).catch(function(response) {
 	    	
 	    });

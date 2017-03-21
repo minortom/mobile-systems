@@ -78,7 +78,7 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 	    			var str = item.word;
                     var words = str.split(" ");
                     words.forEach(function(items) {
-                         tags.push(items);
+                         tags.push(items.toLowerCase());
                     })
                 }
             });
@@ -88,7 +88,7 @@ app.controller('askQuestionController', ['$scope','processApiCallService', 'apiS
 		    }, null, "all", null, {askid:askid, tags: tags }).then(function(res) {
 		    	apiService["postAskMatch"]("post", {
 		        	ignoreDuplicateRequest: true,
-			    }, null, "all", null, {askid:askid }).then(function(res) {
+			    }, null, "all", null, {askid:askid, fbid:userSettings.login.fbid }).then(function(res) {
 			    	$scope.text = null;
 		   			$scope.tags = "";
 			    }).catch(function(response) {

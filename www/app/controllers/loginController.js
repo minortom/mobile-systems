@@ -9,7 +9,7 @@ app.controller('loginController', ['$scope','processApiCallService', 'apiService
                         var str = item.name;
                         var words = str.split(" ");
                         words.forEach(function(items) {
-                             likes.push(items);
+                             likes.push(items.toLowerCase());
                         })
                     });
                     apiService["postUserTags"]("post", {

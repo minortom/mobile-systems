@@ -22,9 +22,9 @@ spl_autoload_register(function ($classname) {
 });
 
 $config['displayErrorDetails'] = true;
-$config['db']['host']   = "localhost:3306";
-$config['db']['user']   = "42";
-$config['db']['pass']   = "H0at!i91";
+$config['db']['host']   = "localhost:8889";
+$config['db']['user']   = "root";
+$config['db']['pass']   = "root";
 $config['db']['dbname'] = "42";
 
 

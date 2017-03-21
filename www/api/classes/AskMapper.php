@@ -85,7 +85,8 @@ class AskMapper extends Mapper
     }
     public function findBestMatch(AskEntity $ask) {
         $askId = $ask->getAskId();
-        if(!isset($askId)) {
+        $fbid = $ask->getFbid();
+        if(!isset($askId) || !isset($fbid)) {
             return  array("success"=>false, "message"=>"Forgot some params");
         }
         $stmt = $this->db->prepare("SELECT t.*, COUNT(*) as matches, tr.userId FROM askTags AS t
@@ -96,11 +97,13 @@ class AskMapper extends Mapper
         if (!empty($result) ) {
             $count = 0;
             foreach ($result as $ask) {
+                if($ask['userId'] != $fbid) {
                 $stmt = $this->db->prepare("INSERT INTO matches (askId, userId, matching) 
                          SELECT :askid, :userid, :matching
             FROM (select 1) as a WHERE NOT EXISTS(SELECT askId, userId, matching FROM matches WHERE askId = :askid AND  userId =:userid AND matching = :matching) LIMIT 1;");
                 $stmt->execute(array(':askid'=>$ask['askId'], ':userid'=>$ask['userId'], ':matching'=>$ask['matches']));
             }
+        }
             $message = array("success"=>true, "message"=>"Matches submitted");
         } else {
             $message = array("success"=>false, "message"=>"Something went wrong while matching");

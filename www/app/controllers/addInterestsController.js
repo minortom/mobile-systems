@@ -34,7 +34,7 @@ app.controller('addInterestsController', ['$scope','processApiCallService', 'api
     		var items = [];
 	    	var res = res.data.data;
 	    	res.forEach(function(item) {
-	    		items.push({id : parseInt(item.id), name : item.tag, view : item.tag});
+	    		items.push({id : parseInt(item.id), name : item.tag, view : item.tag, level: 0});
 	    	});
 	    	$scope.addedItems = items;
 	    }
