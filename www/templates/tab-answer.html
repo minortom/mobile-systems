@@ -6,6 +6,10 @@
     </div>
   </ion-header-bar>
   <ion-content class="has-header">
+  <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="loadAnswerList()">
+    </ion-refresher>
     <div ng-if="!(answerList.length > 0)"class="card">
       <div class="item item-text-wrap">
         There are no questions you could answer yet.
@@ -19,7 +23,7 @@
           <p>Posted by <i>{{answer.name}}</i><br>at <i>{{answer.date | date:'yyyy-MM-dd HH:mm'}}</i></p>
       </div>
       <div class="item">
-        <p><a class="subdued" ng-click="answer.open = !answer.open">{{ answer.answers.length }} answer(s)</a><a class="button item-note button-small button-balanced" ng-click="answerQuestion(answer.id, answer.message)">Answer question</a></p>
+        <p><a class="subdued" ng-click="answer.open = !answer.open" style="padding-top: 20px;padding-bottom: 20px;">{{ answer.answers.length }} answer(s)</a><a class="button item-note button-small button-balanced" ng-click="answerQuestion(answer.id, answer.message)">Answer question</a></p>
       </div>
       <div ng-if="answer.open" ng-click="answer.open = !answer.open" ng-repeat="answerr in answer.answers" ng-show="answer.open" class="item item-body">
          <div class="item item-avatar item-text-wrap">

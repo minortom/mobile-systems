@@ -9,12 +9,16 @@
   </div>
 </ion-header-bar>
 <ion-content class="has-header">
+<ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="loadAskList()">
+    </ion-refresher>
 	<div ng-if="!(askList.length > 0)"class="card">
 	  <div class="item item-text-wrap">
 	    No questions asked yet..
 	  </div>
 	</div>
-   <div class="list card" ng-repeat="ask in askList | orderBy:'date':true track by ask.id">
+   <div class="list card" ng-repeat="ask in askList">
 
       <div class="item item-avatar item-text-wrap">
         <img ng-src="{{ask.image}}">
@@ -23,7 +27,7 @@
          
       </div>
       <div class="item">
-        <p><a class="subdued" ng-click="ask.open = !ask.open">{{ ask.answers.length }} answer(s)</a></p>
+        <p><a class="subdued" ng-click="ask.open = !ask.open" style="padding-top: 20px;padding-bottom: 20px;">{{ ask.answers.length }} answer(s)</a></p>
       </div>
       <div ng-if="ask.open" ng-click="ask.open = !ask.open" ng-repeat="answer in ask.answers" ng-show="ask.open" class="item item-body">
          <div class="item item-avatar item-text-wrap">

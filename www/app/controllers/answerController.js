@@ -1,5 +1,6 @@
 app.controller('answerController', ['$scope','processApiCallService', 'apiService','$state','store', '$rootScope', 'authService', '$location', '$fancyModal','$sce', '$timeout','$cordovaOauth', '$ionicPopup',function ($scope, processApiCallService, apiService, $state, store, $rootScope, authService, $location, $fancyModal, $sce, $timeout, $cordovaOauth, $ionicPopup) {
   var userSettings = store.get('userSettings');
+  $scope.totalLevel = store.get('totalLevel');
   var listCount = 0;
   var previousData;
   $scope.answerQuestion = function(id, question) {
@@ -13,6 +14,8 @@ app.controller('answerController', ['$scope','processApiCallService', 'apiServic
 	    	if(res.data) {
 		    	if(res.data.data) {
 		    		$scope.answerList = res.data.data;
+
+		    		$scope.$broadcast('scroll.refreshComplete');
 		    		if(res.data.data !== previousData) {
 				    	if(res.data.data.length > listCount && listCount != 0) {
 				    		var badgeAlerts = store.get("badgeAlerts");
@@ -25,7 +28,7 @@ app.controller('answerController', ['$scope','processApiCallService', 'apiServic
 			    }
 			}
 	    }).catch(function(response) {
-	    	
+	    	$scope.$broadcast('scroll.refreshComplete');
 	    });
 	}
 	$scope.loadAnswerList();

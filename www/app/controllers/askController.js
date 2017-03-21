@@ -14,7 +14,10 @@ app.controller('askController', ['$scope','processApiCallService', 'apiService',
 	    	console.log(res)
 	    	if(res.data) {
 		    	if(res.data.data) {
+
 		    		$scope.askList = res.data.data;
+		    		console.log($scope.askList);
+		    		$scope.$broadcast('scroll.refreshComplete');
 		    		if(res.data.data !== previousData) {
 				    	if(res.data.data.length > listCount && listCount != 0) {
 				    		var badgeAlerts = store.get("badgeAlerts");
@@ -27,7 +30,7 @@ app.controller('askController', ['$scope','processApiCallService', 'apiService',
 			    }
 			}
 	    }).catch(function(response) {
-	    	
+	    	$scope.$broadcast('scroll.refreshComplete');
 	    });
 	}
 	$scope.acceptAnswer = function(id) {
